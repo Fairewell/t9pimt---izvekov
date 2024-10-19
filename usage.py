@@ -16,3 +16,4 @@ if valid:
     print("The generated string is valid according to the grammar.")
 else:
     print("The generated string is not valid.")
+    

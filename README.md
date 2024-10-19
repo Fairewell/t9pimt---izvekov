@@ -1,26 +1,55 @@
-### CFG Generator
-This is a Python implementation of a Context-Free Grammar (CFG) generator. The generator reads rules from an input file, generates strings based on the rules, and validates them. The input file follows a specific format, allowing you to define terminals, non-terminals, and transformation rules for the grammar.
+# Контекстно-свободная грамматика (CFG) на Python
 
-### Features
-- Grammar Input: The CFG class accepts a file with a custom format specifying terminals, non-terminals, and their transformation rules.
-- String Generation: Generates strings based on the grammar rules using recursive methods, ensuring the string length is controlled.
-- Validation: Validates whether a generated string matches the grammar rules.
-- Logging: Logs each step of the generation and validation processes.
-- Performance Tracking: Tracks the time taken and the number of steps involved in generating and validating strings.
+Этот проект представляет собой реализацию контекстно-свободной грамматики (CFG) на Python. Он позволяет загружать правила из файла, генерировать строки на основе этих правил и проверять, являются ли сгенерированные строки допустимыми согласно грамматике.
 
-### File Format
-The input file for the grammar should have the following structure:
+## Оглавление
 
-```makefile
-G({Terminals}, {Non-Terminals})
-Pn:
-Rules for non-terminals
-Pt:
-Rules for terminals (if any)
+- [Установка](#установка)
+- [Использование](#использование)
+- [Формат файла правил](#формат-файла-правил)
+- [Методы](#методы)
+- [Логирование](#логирование)
+- [Пример](#пример)
+
+## Установка
+
+1. Скопируйте или клонируйте этот репозиторий на свой компьютер.
+2. Убедитесь, что у вас установлен Python (версия 3.6 и выше).
+3. Установите необходимые зависимости, если таковые имеются.
+
+## Использование
+
+```python
+from cfg_full import CFG
+
+# Создайте объект CFG, передав путь к файлу с правилами
+cfg = CFG('путь_к_файлу_с_правилами.txt')
+
+# Сгенерируйте строку на основе грамматики
+generated_string, attempts, total_time, steps = cfg.generate()
+
+print(f"Сгенерированная строка: {generated_string}")
+print(f"Количество попыток: {attempts}, Время генерации: {total_time:.6f} секунд, Шаги генерации: {steps}")
+
+# Проверьте, является ли строка допустимой
+is_valid = cfg.is_valid_string(generated_string)
+print(f"Строка допустима: {is_valid}")
 ```
-### Example (`cfg_rules.txt`)
+
+## Формат файла правил
+
+Файл правил должен содержать следующие секции:
+
+- `#`: Строка комментария.
+- `G`: Определение терминалов, нетерминалов, стартового символа и максимальной длины.
+- `Pn`: Правила продукции для нетерминалов.
+- `Pt`: Правила для терминалов (опционально).
+- `env`: Стартовый символ, Максимальная длина, символ в конце сообщения.
+
+Пример формата файла правил:
+
 ```mathematica
-G({the, a, some, any, every, green, young, tired, confused, dog, cat, John, Mary, sleeps, walks, loves, hates, says, thinks, believes, that}, {S, NP, VP, Det, Adj, N, PropN, Vi, Vt, Vc, Comp})
+G({терминал1, терминал2}, {нетерминал1, нетерминал2})
 Pn:
 S → NP VP
 NP → Det Adj N | Det N | Adj PropN | PropN
@@ -34,51 +63,31 @@ Vi → sleeps | walks
 Vt → loves | hates
 Vc → says | thinks | believes
 Comp → that
+env: S | 50 | ?
 ```
-- G({Terminals}, {Non-Terminals}): This line defines the terminals and non-terminals used in the grammar.
-- Pn:: Section for non-terminal rules. Each rule specifies transformations for a non-terminal symbol.
-- Pt:: Section for terminal rules (optional). Specifies how terminals are defined.
 
-### How to Use
-- Create a file (`cfg_rules.txt`) with your grammar rules following the specified format.
-- Run the script:
-```bash
-python cfg_full.py
-```
-### Output
-The program will generate a string based on the grammar and display whether it is valid. Additionally, it will log information about each step of the generation and validation process in `cfg_generations.log`.
+## Методы
 
-### Example Output
+- `load_rules(rules_file)`: Загружает правила из указанного файла.
+- `generate(symbol=None, depth=0)`: Генерирует строку, начиная с указанного символа.
+- `is_valid_string(string)`: Проверяет, является ли указанная строка допустимой.
+
+## Логирование
+
+Все операции записываются в файл `cfg_generations.log`, который содержит информацию о попытках генерации, времени выполнения и прочих важных событиях.
+Как это выглядит:
 ```yaml
-Generated string: some young dog walks
-Counter: 5
-Total generation time: 0.123456 seconds
-Steps for generation: 42
-Validation time: 0.234567 seconds
-Validation steps: 58
-The generated string is valid according to the grammar.
+2024-10-20 00:37:14,572 - INFO - Loaded rules: {'S': ['NP VP'], 'NP': ['Det Adj N', 'Det N', 'Adj PropN', 'PropN'], 'VP': ['Vi', 'Vt NP', 'Vc Comp S'], 'Det': ['the', 'a', 'some', 'any', 'every'], 'Adj': ['green', 'young', 'tired', 'confused'], 'N': ['dog', 'cat'], 'PropN': ['John', 'Mary'], 'Vi': ['sleeps', 'walks'], 'Vt': ['loves', 'hates'], 'Vc': ['says', 'thinks', 'believes'], 'Comp': ['that']}
+2024-10-20 00:37:14,572 - INFO - Terminals: {'thinks', 'loves', 'Mary', 'the', 'every', 'cat', 'some', 'John', 'walks', 'says', 'tired', 'green', 'young', 'a', 'believes', 'sleeps', 'confused', 'hates', 'that', 'any', 'dog'}
+2024-10-20 00:37:14,572 - INFO - Variables: {''}
+2024-10-20 00:37:14,572 - INFO - CFG initialized with rules from rules/with_G_Pt.txt
+2024-10-20 00:37:14,572 - INFO - Generate attempt: 1
+2024-10-20 00:37:14,572 - INFO - Time taken for counter 1: 0.000000 seconds, Steps: 10
+2024-10-20 00:37:14,572 - INFO - Generated valid string: Mary hates John
+2024-10-20 00:37:14,572 - INFO - Total time taken for all counters: 0.000000 seconds
+2024-10-20 00:37:14,572 - INFO - Checking validity of string: Mary hates John. - True
 ```
-### Logging
-The program logs important information such as:
 
-The number of attempts (`Counter`) made to generate a valid string.
-The time taken for each generation attempt and the total time.
-The number of steps involved in both generation and validation.
-Whether the generated string was valid.
-Logs are stored in a file called `cfg_generations.log.`
+## Пример
 
-### Dependencies
-- Python 3.x
-No additional libraries are required.
-
-### Customization
-- Max Depth: You can adjust the maximum recursion depth when generating strings by changing the `max_depth` parameter when initializing the `CFG` class:
-```python
-cfg = CFG('cfg_rules.txt', max_depth=15)
-```
-- Grammar Rules: Modify `cfg_rules.txt` to suit your specific language needs.
-### Notes
-- Ensure the grammar file follows the correct format. Incorrect formatting may cause errors during parsing.
-- Be mindful of setting an appropriate `max_depth` value to avoid infinite recursion or overly long generation times.
-### License
-This project is open-source and available for use and modification.
+Пример использования класса CFG и его методов можно найти в разделе [Использование](#использование).
