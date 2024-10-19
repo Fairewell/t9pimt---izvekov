@@ -1,0 +1,14 @@
+G({the, a, some, any, every, green, young, tired, confused, dog, cat, John, Mary, sleeps, walks, loves, hates, says, thinks, believes, that}, {S, NP, VP, Det, Adj, N, PropN, Vi, Vt, Vc, Comp})
+Pn:
+S -> NP VP
+NP -> Det Adj N | Det N | Adj PropN | PropN
+VP -> Vi | Vt NP | Vc Comp S
+Pt:
+Det -> the | a | some | any | every
+Adj -> green | young | tired | confused
+N -> dog | cat
+PropN -> John | Mary
+Vi -> sleeps | walks
+Vt -> loves | hates
+Vc -> says | thinks | believes
+Comp -> that
