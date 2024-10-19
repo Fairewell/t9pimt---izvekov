@@ -1,0 +1,18 @@
+# Генерация вопросов.
+G({how, is, there, anyone, much, many, you, the, a, some, any, green, young, tired, confused, dog, cat, John, Mary, sleeps, walks, loves, hates, says, thinks, believes, that}, {S, Q, NP, VP, Det, Adj, N, PropN, Vi, Vt, Vc, Comp, Quest})
+Pn:
+S -> Q | NP VP
+Q -> Quest VP | Quest NP | Quest
+NP -> Det Adj N | Det N | Adj PropN | PropN
+VP -> Vi | Vt NP | Vc Comp S
+Pt:
+Quest -> How | Is | Are | Who 
+Det -> the | a | some | any
+Adj -> green | young | tired | confused
+N -> dog | cat
+PropN -> John | Mary
+Vi -> sleeps | walks | is
+Vt -> loves | hates
+Vc -> says | thinks | believes
+Comp -> that
+env: S | 100 | ?

@@ -1,0 +1,20 @@
+2024-10-20 00:37:14,572 - INFO - Loaded rules: {'S': ['NP VP'], 'NP': ['Det Adj N', 'Det N', 'Adj PropN', 'PropN'], 'VP': ['Vi', 'Vt NP', 'Vc Comp S'], 'Det': ['the', 'a', 'some', 'any', 'every'], 'Adj': ['green', 'young', 'tired', 'confused'], 'N': ['dog', 'cat'], 'PropN': ['John', 'Mary'], 'Vi': ['sleeps', 'walks'], 'Vt': ['loves', 'hates'], 'Vc': ['says', 'thinks', 'believes'], 'Comp': ['that']}
+2024-10-20 00:37:14,572 - INFO - Terminals: {'thinks', 'loves', 'Mary', 'the', 'every', 'cat', 'some', 'John', 'walks', 'says', 'tired', 'green', 'young', 'a', 'believes', 'sleeps', 'confused', 'hates', 'that', 'any', 'dog'}
+2024-10-20 00:37:14,572 - INFO - Variables: {''}
+2024-10-20 00:37:14,572 - INFO - CFG initialized with rules from rules/with_G_Pt.txt
+2024-10-20 00:37:14,572 - INFO - Generate attempt: 1
+2024-10-20 00:37:14,572 - INFO - Time taken for counter 1: 0.000000 seconds, Steps: 10
+2024-10-20 00:37:14,572 - INFO - Generated valid string: Mary hates John
+2024-10-20 00:37:14,572 - INFO - Total time taken for all counters: 0.000000 seconds
+2024-10-20 00:37:14,572 - INFO - Checking validity of string: Mary hates John. - False
+2024-10-20 00:37:14,572 - INFO - Time taken for validation: 0.000000 seconds, Steps: 2
+2024-10-20 00:40:35,394 - INFO - Loaded rules: {'S': ['NP VP'], 'NP': ['Det Adj N', 'Det N', 'Adj PropN', 'PropN'], 'VP': ['Vi', 'Vt NP', 'Vc Comp S'], 'Det': ['the', 'a', 'some', 'any', 'every'], 'Adj': ['green', 'young', 'tired', 'confused'], 'N': ['dog', 'cat'], 'PropN': ['John', 'Mary'], 'Vi': ['sleeps', 'walks'], 'Vt': ['loves', 'hates'], 'Vc': ['says', 'thinks', 'believes'], 'Comp': ['that']}
+2024-10-20 00:40:35,394 - INFO - Terminals: {'young', 'sleeps', 'green', 'hates', 'tired', 'believes', 'says', 'every', 'any', 'dog', 'confused', 'cat', 'the', 'loves', 'Mary', 'that', 'walks', 'some', 'thinks', 'John', 'a'}
+2024-10-20 00:40:35,394 - INFO - Variables: {''}
+2024-10-20 00:40:35,394 - INFO - CFG initialized with rules from rules/with_G_Pt.txt
+2024-10-20 00:40:35,394 - INFO - Generate attempt: 1
+2024-10-20 00:40:35,412 - INFO - Time taken for counter 1: 0.017908 seconds, Steps: 25
+2024-10-20 00:40:35,412 - INFO - Generated valid string: confused John says that some green cat loves John
+2024-10-20 00:40:35,412 - INFO - Total time taken for all counters: 0.017908 seconds
+2024-10-20 00:40:35,412 - INFO - Checking validity of string: confused John says that some green cat loves John. - False
+2024-10-20 00:40:35,412 - INFO - Time taken for validation: 0.000000 seconds, Steps: 2

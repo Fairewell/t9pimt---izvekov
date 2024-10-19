@@ -12,3 +12,4 @@ Vi -> sleeps | walks
 Vt -> loves | hates
 Vc -> says | thinks | believes
 Comp -> that
+env: S | 50
